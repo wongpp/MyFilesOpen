@@ -1,5 +1,4 @@
 
-
 # Formula Recognition and Optimization
 
 ## Handwritten Formula Recognition
@@ -7,34 +6,42 @@
 ### Original Formula:
 The original formula is given as:
 
-\[
-X_n = \left( \frac{X_{n-1}}{Y_{n-1}} \cdot 2^{(6)} + \left( X_{n-1} - \frac{X_{n-1}}{Y_{n-1}} \right) Y_{n-1} \right) + S_{n-1}
-\]
+$$  
+X_n = \left( rac{X_{n-1}}{Y_{n-1}} \cdot 2^{(6)} + \left( X_{n-1} - rac{X_{n-1}}{Y_{n-1}} 
+ight) Y_{n-1} 
+ight) + S_{n-1}  
+$$
 
 ### Simplified Formula:
 By simplifying, we get:
 
-\[
-X_n = X_{n-1} \cdot \left( \frac{2^{(6)}}{Y_{n-1}} + 1 - \left( \frac{1}{Y_{n-1}} \right) Y_{n-1} \right) + S_{n-1}
-\]
+$$  
+X_n = X_{n-1} \cdot \left( rac{2^{(6)}}{Y_{n-1}} + 1 - \left( rac{1}{Y_{n-1}} 
+ight) Y_{n-1} 
+ight) + S_{n-1}  
+$$
 
-## Further Simplification to Remove \(X_{n-1}\)
+## Further Simplification to Remove $X_{n-1}$
 
-To remove explicit \(X_{n-1}\):
+To remove explicit $X_{n-1}$:
 
-\[
-X_n = X_{n-1} \left( \frac{2^6 - 1 + Y_{n-1}}{Y_{n-1}} \right) + S_{n-1}
-\]
+$$  
+X_n = X_{n-1} \left( rac{2^6 - 1 + Y_{n-1}}{Y_{n-1}} 
+ight) + S_{n-1}  
+$$
 
-This shows that \(X_{n-1}\) cannot be fully eliminated without losing the recursive relationship.
+This shows that $X_{n-1}$ cannot be fully eliminated without losing the recursive relationship.
 
-## General Form Expression with Initial Condition \(X_0\)
+## General Form Expression with Initial Condition $X_0$
 
-If \(X_0\) is a constant, we can express \(X_n\) in a non-recursive form:
+If $X_0$ is a constant, we can express $X_n$ in a non-recursive form:
 
-\[
-X_n = X_0 \cdot \prod_{i=0}^{n-1} \left( \frac{2^6 - 1 + Y_i}{Y_i} \right) + \sum_{j=0}^{n-1} \left( S_j \cdot \prod_{k=j+1}^{n-1} \left( \frac{2^6 - 1 + Y_k}{Y_k} \right) \right)
-\]
+$$  
+X_n = X_0 \cdot \prod_{i=0}^{n-1} \left( rac{2^6 - 1 + Y_i}{Y_i} 
+ight) + \sum_{j=0}^{n-1} \left( S_j \cdot \prod_{k=j+1}^{n-1} \left( rac{2^6 - 1 + Y_k}{Y_k} 
+ight) 
+ight)  
+$$
 
 ## Parallelization of Accumulation and Multiplication
 
@@ -72,7 +79,7 @@ print(X_n)
 
 1. **`cp.cumprod(...)`**: Computes the cumulative product in parallel using GPU acceleration.
    
-2. **`cp.concatenate(...)`**: Combines prefix products for multiplication with \(S_j\).
+2. **`cp.concatenate(...)`**: Combines prefix products for multiplication with $S_j$.
 
 3. **`cp.sum(...)`**: Performs a parallel reduction sum on the GPU.
 
